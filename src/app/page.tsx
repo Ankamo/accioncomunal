@@ -31,7 +31,7 @@ export default function Home() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    const fetchedDepartamentos = data.values.slice(1).map((row) => ({
+                    const fetchedDepartamentos = data.values.slice(1).map((row: string[]) => ({
                         id: row[0],
                         nombre: row[1],
                     }));
@@ -61,8 +61,8 @@ export default function Home() {
                     if (response.ok) {
                         const data = await response.json();
                         const fetchedMunicipios = data.values.slice(1)
-                            .filter((row) => row[0] === formData.department)
-                            .map((row) => ({
+                            .filter((row: string[]) => row[0] === formData.department)
+                            .map((row: string[]) => ({
                                 id: row[2],
                                 nombre: row[3],
                             }));
@@ -93,7 +93,7 @@ export default function Home() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    const fetchedTiposOac = data.values.slice(1).map((row) => ({
+                    const fetchedTiposOac = data.values.slice(1).map((row: string[]) => ({
                         nombre: row[0],
                     }));
                     setTiposOac(fetchedTiposOac);
@@ -120,7 +120,7 @@ export default function Home() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    const fetchedTiposUbicacion = data.values.slice(1).map((row) => ({
+                    const fetchedTiposUbicacion = data.values.slice(1).map((row: string[]) => ({
                         nombre: row[0],
                     }));
                     setTiposUbicacion(fetchedTiposUbicacion);

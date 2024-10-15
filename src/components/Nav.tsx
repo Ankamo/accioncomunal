@@ -7,6 +7,11 @@ const Nav = () => {
         <nav className="bg-[#131212] text-white p-4">
             <ul className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 text-center">
                 <li>
+                    <Link href="/index">
+                        Inicio
+                    </Link>
+                </li>
+                <li>
                     <Link href="/cartelera">
                         Cartelera
                     </Link>
