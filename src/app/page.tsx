@@ -135,68 +135,69 @@ export default function Home() {
         fetchTiposUbicacion();
     }, [apiKey, sheetId]);
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
+    };    
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        // Validar que se seleccionaron los datos necesarios
-        if (!formData.department || !formData.municipality || !formData.tipoOac || !formData.tipoUbicacion) {
-            alert('Por favor completa todos los campos.');
-            return;
-        }
+    // Validar que se seleccionaron los datos necesarios
+    if (!formData.department || !formData.municipality || !formData.tipoOac || !formData.tipoUbicacion) {
+        alert('Por favor completa todos los campos.');
+        return;
+    }
 
-        try {
-            // Preparar los datos para enviar a Google Sheets
-            const body = {
-                values: [
-                    [
-                        formData.department,
-                        formData.municipality,
-                        formData.tipoOac,
-                        formData.tipoUbicacion,
-                        formData.nombreBarrio || '',
-                        '', // URL, puedes agregarla si es necesario
-                    ],
+    try {
+        // Preparar los datos para enviar a Google Sheets
+        const body = {
+            values: [
+                [
+                    formData.department,
+                    formData.municipality,
+                    formData.tipoOac,
+                    formData.tipoUbicacion,
+                    formData.nombreBarrio || '',
+                    '', // URL, puedes agregarla si es necesario
                 ],
-            };
+            ],
+        };
 
-            // Hacer la petición POST a la API de Google Sheets
-            const response = await fetch(
-                `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/OacRegistrados!A:H:append?valueInputOption=USER_ENTERED&key=${apiKey}`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body),
-                }
-            );
-
-            if (response.ok) {
-                alert('Datos enviados correctamente a la hoja OacRegistrados.');
-                setFormData({
-                    department: '',
-                    municipality: '',
-                    tipoOac: '',
-                    tipoUbicacion: '',
-                    nombreBarrio: '',
-                });
-            } else {
-                const errorData = await response.json();
-                console.error('Error al enviar los datos a Google Sheets:', errorData);
-                throw new Error('Error al enviar los datos a Google Sheets.');
+        // Hacer la petición POST a la API de Google Sheets
+        const response = await fetch(
+            `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/OacRegistrados!A:H:append?valueInputOption=USER_ENTERED&key=${apiKey}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
             }
-        } catch (error) {
-            console.error('Error al enviar los datos:', error);
-            alert('Hubo un error al enviar los datos.');
+        );
+
+        if (response.ok) {
+            alert('Datos enviados correctamente a la hoja OacRegistrados.');
+            setFormData({
+                department: '',
+                municipality: '',
+                tipoOac: '',
+                tipoUbicacion: '',
+                nombreBarrio: '',
+            });
+        } else {
+            const errorData = await response.json();
+            console.error('Error al enviar los datos a Google Sheets:', errorData);
+            throw new Error('Error al enviar los datos a Google Sheets.');
         }
-    };
+    } catch (error) {
+        console.error('Error al enviar los datos:', error);
+        alert('Hubo un error al enviar los datos.');
+    }
+};
 
     return (
         <main className="min-h-screen bg-gray-800 flex items-center justify-center">
