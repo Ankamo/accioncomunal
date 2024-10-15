@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset básico y estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: red; /* Color de fondo del body */
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Enlaces */
+a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #63a4ff;
+    text-decoration: underline;
+}
+
+/* Imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Estilos para el header */
+.header-container {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    background-color: #131212; /* Color oscuro para el header */
+    color: white;
+    width: 100%;
+}
+
+.logo-left, .logo-right {
+    padding: 0;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.header-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+}
+
+.header-text {
+    font-size: 16px;
+}
+
+/* Estilos para el nav */
+nav {
+    background-color: #333; /* Color diferente del body, header y footer */
+    padding: 0;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: #e0e0e0; /* Color de texto claro */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #63a4ff; /* Color de hover */
+    text-decoration: underline;
+}
+
+/* Estilos para el footer */
+.footer-container {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: #131212; /* Color oscuro para el footer */
+    color: white;
+    width: 100%;
+    max-width: auto;
+    margin: 0;
+    gap: 100px;
+}
+
+.footer-info {
+    margin-bottom: 0;
+}
+
+.footer-info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-logo a {
+    display: block;
+}
+
+.footer-creator {
+    font-size: 14px;
+}
